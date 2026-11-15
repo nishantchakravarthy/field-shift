@@ -2,6 +2,8 @@
 
 **South India crop suitability, today and in 2050, from NASA data.**
 
+**Live demo:** <https://field-shift-blond.vercel.app> · [Shift Map](https://field-shift-blond.vercel.app/map) · [Guided story](https://field-shift-blond.vercel.app/map?story=1) · [Methodology](https://field-shift-blond.vercel.app/methodology)
+
 Field Shift is one combined 3D map of 131 districts across Karnataka, Tamil
 Nadu, Kerala, Andhra Pradesh, Telangana and Goa. It shows how well each
 district suits paddy, ragi and maize under the climate of 2001–2020, and how
@@ -201,8 +203,12 @@ GitHub Actions runs the same checks on every push (`.github/workflows/ci.yml`).
 
 ## Deploy
 
-- **Frontend (Vercel).** Import the repository and set the root directory to
-  `web`. The bundled data ships with the build, so the site works on its own.
+- **Frontend (Vercel), live at <https://field-shift-blond.vercel.app>.** The
+  Vercel project `field-shift` is linked to this repository with root directory
+  `web` (Next.js, Node 22). Every push to `main` redeploys production; other
+  branches get preview URLs. The site is static plus Next.js, so it stays up
+  24/7 with no server to keep awake. The bundled data ships with the build, so
+  the site works on its own without the API.
   Set `NEXT_PUBLIC_API_URL` (see `web/.env.example`) to the deployed API. The
   landing and methodology pages read `web/public/data` at build time, so
   rebuild after regenerating data.
