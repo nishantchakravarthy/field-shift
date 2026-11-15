@@ -1,0 +1,30 @@
+{
+  "_provenance": "FAO ECOCROP database (TOPMN/TOPMX, TMIN/TMAX, ROPMN/ROPMX, RMIN/RMAX, GMIN/GMAX columns), read from the EcoCrop_DB.csv mirror at https://github.com/OpenCLIM/ecocrop. Temperatures in deg C, rainfall in mm per growing cycle, cycle length in days.",
+  "paddy": {
+    "label": "Paddy (rice)",
+    "ecocrop_name": "Oryza sativa",
+    "temp_opt": [20, 30],
+    "temp_abs": [10, 36],
+    "rain_opt": [1500, 2000],
+    "rain_abs": [1000, 4000],
+    "cycle_days": [80, 180]
+  },
+  "ragi": {
+    "label": "Ragi (finger millet)",
+    "ecocrop_name": "Eleusine coracana ssp. coracana",
+    "temp_opt": [18, 30],
+    "temp_abs": [8, 35],
+    "rain_opt": [500, 1100],
+    "rain_abs": [300, 4300],
+    "cycle_days": [75, 180]
+  },
+  "maize": {
+    "label": "Maize",
+    "ecocrop_name": "Zea mays",
+    "temp_opt": [18, 33],
+    "temp_abs": [10, 47],
+    "rain_opt": [600, 1200],
+    "rain_abs": [400, 1800],
+    "cycle_days": [65, 365]
+  }
+}

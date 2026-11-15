@@ -1,0 +1,8 @@
+{
+  "crop": "paddy",
+  "scenario": "ssp245",
+  "districts": [
+    { "id": "testpur", "baseline": 70, "y2030": 62, "y2050": 50, "change": -20 },
+    { "id": "sample_nagar", "baseline": 10, "y2050": 15, "change": 5 }
+  ]
+}

@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+npm-debug.log*
+
+# Environment and credentials
+.env
+.env.*
+!.env.example
+*-credentials.json
+service-account*.json
+
+# Raw exports and download caches (rebuild with data/scripts)
+data/raw/
+data/cache/
+*.nc
+*.nc4
+
+# Deploy and editor
+.vercel/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

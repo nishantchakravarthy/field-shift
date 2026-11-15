@@ -1,0 +1,10 @@
+# raw downloads (~420 MB per state); rebuild with the scripts in data/scripts
+raw/cmip6/
+raw/boundaries/
+raw/ecocrop/
+raw/probe/
+raw/modis/worldcover_mosaic.npy
+raw/*.log
+raw/south_india/cmip6/
+raw/south_india/modis/worldcover_mosaic.npy
+.venv/

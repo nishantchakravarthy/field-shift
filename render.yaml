@@ -1,0 +1,15 @@
+# Render blueprint for the Field Shift API (free web service).
+services:
+  - type: web
+    name: field-shift-api
+    runtime: python
+    plan: free
+    rootDir: api
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: ALLOWED_ORIGINS
+        sync: false # set to the Vercel URL, e.g. https://your-app.vercel.app

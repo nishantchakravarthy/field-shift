@@ -1,0 +1,52 @@
+{
+  "id": "testpur",
+  "name": "Testpur",
+  "history": {
+    "years": [2001, 2002, 2003],
+    "rain_mm": [800.0, 650.5, 720.2],
+    "ndvi_peak": [0.7, 0.66, null],
+    "lst_day_c": [33.0, 34.1, 33.6]
+  },
+  "climate": {
+    "ssp245": {
+      "temp_base_c": 26.0,
+      "temp_2050_c": 27.5,
+      "rain_base_mm": 780.0,
+      "rain_2050_mm": 740.0,
+      "onset_shift_weeks": 1.5,
+      "tmax_base_c": 31.0,
+      "tmax_2050_c": 32.6,
+      "onset_base_doy": 160.0,
+      "onset_2050_doy": 170.5
+    },
+    "ssp585": {
+      "temp_base_c": 26.0,
+      "temp_2050_c": 28.2,
+      "rain_base_mm": 780.0,
+      "rain_2050_mm": 760.0,
+      "onset_shift_weeks": 2.0
+    }
+  },
+  "plan": {
+    "ssp245": {
+      "best_now": "paddy",
+      "best_2050": "ragi",
+      "switch": true,
+      "water_gap_mm": { "paddy": 760.0, "ragi": 0, "maize": 0 },
+      "actions": ["Shift sowing 1.5 weeks later than today"],
+      "scores": {
+        "paddy": { "baseline": 70, "y2050": 50 },
+        "ragi": { "baseline": 65, "y2050": 80 },
+        "maize": { "baseline": 60, "y2050": 72 }
+      },
+      "limiting": { "paddy": "rain", "ragi": "temp", "maize": "rain" }
+    },
+    "ssp585": {
+      "best_now": "paddy",
+      "best_2050": "maize",
+      "switch": true,
+      "water_gap_mm": { "paddy": 740.0, "ragi": 0, "maize": 0 },
+      "actions": ["Shift sowing 2.0 weeks later than today"]
+    }
+  }
+}

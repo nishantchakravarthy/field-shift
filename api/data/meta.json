@@ -1,0 +1,351 @@
+{
+ "generated": "2026-11-15",
+ "region": "South India, India",
+ "states": {
+  "Karnataka": 30,
+  "Tamil Nadu": 38,
+  "Kerala": 14,
+  "Andhra Pradesh": 14,
+  "Telangana": 33,
+  "Goa": 2
+ },
+ "season": "Kharif, 1 June – 31 October",
+ "models": [
+  "ACCESS-CM2",
+  "IPSL-CM6A-LR",
+  "MIROC6",
+  "MRI-ESM2-0",
+  "NorESM2-MM"
+ ],
+ "scenarios": [
+  "ssp245",
+  "ssp585"
+ ],
+ "windows": {
+  "baseline": "2001–2020",
+  "y2050": "2041–2060"
+ },
+ "datasets": [
+  {
+   "name": "NASA NEX-GDDP-CMIP6",
+   "ee_id": "NASA/GDDP-CMIP6",
+   "endpoint": "NCCS THREDDS NetCDF Subset Service, AMES/NEX/GDDP-CMIP6",
+   "link": "https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6",
+   "period": "2001–2014 historical; 2015–2020 and 2041–2060 under SSP2-4.5 and SSP5-8.5",
+   "resolution": "0.25° (~25 km), daily",
+   "variables": "pr, tas, tasmax",
+   "use": "Baseline and 2050 kharif temperature, rainfall and monsoon onset behind every suitability score"
+  },
+  {
+   "name": "NASA POWER PRECTOTCORR (MERRA-2 bias-corrected precipitation)",
+   "ee_id": "POWER monthly regional API",
+   "endpoint": "https://power.larc.nasa.gov/api/temporal/monthly/regional",
+   "link": "https://power.larc.nasa.gov/",
+   "period": "2001–2020",
+   "resolution": "0.5° × 0.625°, monthly",
+   "variables": "PRECTOTCORR",
+   "use": "Observed kharif rainfall history chart"
+  },
+  {
+   "name": "NASA MODIS Terra Vegetation Indices (MOD13Q1 v061)",
+   "ee_id": "MODIS/061/MOD13Q1",
+   "endpoint": "LP DAAC product read as cloud-optimised GeoTIFF from the Microsoft Planetary Computer mirror (collection modis-13Q1-061), tiles h25v07, h25v08, h26v07",
+   "link": "https://lpdaac.usgs.gov/products/mod13q1v061/",
+   "period": "2001–2020",
+   "resolution": "250 m, 16-day",
+   "variables": "250m_16_days_NDVI",
+   "use": "Observed peak NDVI history chart (per-pixel kharif maximum, cropland mean) and score validation"
+  },
+  {
+   "name": "NASA MODIS Terra Land Surface Temperature (MOD11A2 v061)",
+   "ee_id": "MODIS/061/MOD11A2",
+   "endpoint": "LP DAAC product read as cloud-optimised GeoTIFF from the Microsoft Planetary Computer mirror (collection modis-11A2-061), tiles h25v07, h25v08, h26v07",
+   "link": "https://lpdaac.usgs.gov/products/mod11a2v061/",
+   "period": "2001–2020",
+   "resolution": "1 km, 8-day",
+   "variables": "LST_Day_1km",
+   "use": "Observed daytime LST history chart (June–October mean over cropland)"
+  },
+  {
+   "name": "ESA WorldCover v200",
+   "ee_id": "ESA/WorldCover/v200",
+   "endpoint": "Microsoft Planetary Computer collection esa-worldcover, read at ~300 m overview",
+   "link": "https://esa-worldcover.org/",
+   "period": "2021",
+   "resolution": "10 m (sampled at ~300 m)",
+   "variables": "class 40 = cropland",
+   "use": "Cropland mask for the MODIS NDVI and LST district means"
+  },
+  {
+   "name": "FAO ECOCROP",
+   "ee_id": "not in Earth Engine",
+   "endpoint": "EcoCrop_DB.csv",
+   "link": "https://github.com/OpenCLIM/ecocrop",
+   "period": "static",
+   "resolution": "per crop",
+   "variables": "optimal and absolute temperature and rainfall ranges",
+   "use": "Crop requirement ranges in the suitability score"
+  },
+  {
+   "name": "geoBoundaries gbOpen IND ADM2",
+   "ee_id": "not in Earth Engine",
+   "endpoint": "geoBoundaries release 9469f09",
+   "link": "https://www.geoboundaries.org/",
+   "period": "boundary year 2021",
+   "resolution": "vector",
+   "variables": "district polygons",
+   "use": "District boundaries for the map and for every district average"
+  }
+ ],
+ "crops": {
+  "paddy": {
+   "temp_opt": [
+    20,
+    30
+   ],
+   "temp_abs": [
+    10,
+    36
+   ],
+   "rain_opt": [
+    1500,
+    2000
+   ],
+   "rain_abs": [
+    1000,
+    4000
+   ],
+   "source": "FAO ECOCROP, Oryza sativa"
+  },
+  "ragi": {
+   "temp_opt": [
+    18,
+    30
+   ],
+   "temp_abs": [
+    8,
+    35
+   ],
+   "rain_opt": [
+    500,
+    1100
+   ],
+   "rain_abs": [
+    300,
+    4300
+   ],
+   "source": "FAO ECOCROP, Eleusine coracana ssp. coracana"
+  },
+  "maize": {
+   "temp_opt": [
+    18,
+    33
+   ],
+   "temp_abs": [
+    10,
+    47
+   ],
+   "rain_opt": [
+    600,
+    1200
+   ],
+   "rain_abs": [
+    400,
+    1800
+   ],
+   "source": "FAO ECOCROP, Zea mays"
+  }
+ },
+ "score": "score = 100 × min(f_temp(mean kharif temperature), f_rain(kharif rainfall)); f is 1 inside the optimal range and falls linearly to 0 at the absolute limits.",
+ "boundaries": {
+  "source": "geoBoundaries gbOpen IND ADM2 (Pathways Data Pvt. Ltd., lgdirectory.gov.in), boundary year 2021",
+  "licence": "Open Data Commons Open Database License 1.0",
+  "district_count": 131,
+  "note": "131 districts across Karnataka, Tamil Nadu, Kerala, Andhra Pradesh, Telangana, Goa. Districts created after the 2021 boundary year (for example Vijayanagara in Karnataka, or Andhra Pradesh's 2022 districts) are not separated and are counted inside their parent district."
+ },
+ "validation": {
+  "pearson_r": -0.06,
+  "n": 131,
+  "description": "Pearson correlation across districts between the baseline (2001–2020) score of the best-scoring crop and the 2001–2020 mean observed peak NDVI (MODIS MOD13Q1).",
+  "note": "The best-crop score barely varies (most districts score 100 for ragi or maize), so this correlation is weak. Per crop, paddy scores track greenness because both follow rainfall; ragi and maize score highest in the drier, less green interior.",
+  "per_crop_score_vs_ndvi_r": {
+   "paddy": 0.6,
+   "ragi": -0.4,
+   "maize": -0.33
+  },
+  "rain_model_vs_observed_r": 0.94,
+  "rain_model_vs_observed_description": "Pearson correlation across districts between CMIP6 ensemble baseline kharif rainfall and NASA POWER observed kharif rainfall, 2001–2020.",
+  "rain_model_minus_observed_mean_mm": 24.1
+ },
+ "limitations": [
+  "Rainfed only: irrigation is not modelled, so canal- and tank-irrigated paddy districts (Mandya, the Kaveri and Godavari deltas) score low for paddy on rainfall alone.",
+  "Scores use district averages of ~25 km climate grid cells; local variation inside a district, steep coastal and Western Ghats gradients in particular, is smoothed out.",
+  "Kharif (June–October) only: the north-east monsoon (October–December), which waters much of Tamil Nadu and coastal Andhra Pradesh, and the rabi season are not scored.",
+  "Climate values are not cropland-masked: every grid cell overlapping a district counts, weighted by overlap area. Only the MODIS NDVI and LST averages use the WorldCover cropland mask.",
+  "In districts with under 5% mapped cropland (coastal and forested districts) the MODIS averages use all land pixels.",
+  "Crop ranges come from the global FAO ECOCROP database, not from local varieties; rainfall ranges are per growing cycle and are compared with June–October rainfall.",
+  "Monsoon onset is searched from 1 June, so an onset before that date is recorded as 1 June; the onset rule never triggers in 7.1% of district-years (dry years in the interior), and those years are left out of the onset average.",
+  "Observed rainfall is NASA POWER (MERRA-2 based, ~50 km), not GPM IMERG, which needs an Earthdata login.",
+  "Projections are the mean of 5 CMIP6 models, one ensemble member each; model spread is reported per district but not propagated into the score.",
+  "MODIS daytime LST under monsoon cloud is sampled on clear days only.",
+  "MODIS history in this build covers NDVI for 2001, 2002, 2006, 2011, 2016 and LST for 2001; the other years were not downloaded in time and show as gaps (rerun fetch_modis.py to complete them). The score itself does not use MODIS."
+ ],
+ "headline": {
+  "ssp245": {
+   "crops": {
+    "paddy": {
+     "districts_losing": 10,
+     "districts_gaining": 29,
+     "districts_unchanged": 92,
+     "suitable_now": 20,
+     "suitable_2050": 22,
+     "mean_baseline": 14.4,
+     "mean_2050": 17.0,
+     "biggest_drop": {
+      "id": "north_goa",
+      "name": "North Goa",
+      "baseline": 94,
+      "y2050": 83,
+      "change": -11
+     },
+     "biggest_gain": {
+      "id": "thiruvananthapuram",
+      "name": "Thiruvananthapuram",
+      "baseline": 28,
+      "y2050": 60,
+      "change": 32
+     }
+    },
+    "ragi": {
+     "districts_losing": 50,
+     "districts_gaining": 5,
+     "districts_unchanged": 76,
+     "suitable_now": 131,
+     "suitable_2050": 131,
+     "mean_baseline": 95.4,
+     "mean_2050": 92.9,
+     "biggest_drop": {
+      "id": "ariyalur",
+      "name": "Ariyalur",
+      "baseline": 100,
+      "y2050": 82,
+      "change": -18
+     },
+     "biggest_gain": {
+      "id": "ramanathapuram",
+      "name": "Ramanathapuram",
+      "baseline": 70,
+      "y2050": 96,
+      "change": 26
+     }
+    },
+    "maize": {
+     "districts_losing": 12,
+     "districts_gaining": 23,
+     "districts_unchanged": 96,
+     "suitable_now": 110,
+     "suitable_2050": 113,
+     "mean_baseline": 83.2,
+     "mean_2050": 84.7,
+     "biggest_drop": {
+      "id": "kollam",
+      "name": "Kollam",
+      "baseline": 53,
+      "y2050": 23,
+      "change": -30
+     },
+     "biggest_gain": {
+      "id": "thoothukkudi",
+      "name": "Thoothukkudi",
+      "baseline": 54,
+      "y2050": 91,
+      "change": 37
+     }
+    }
+   },
+   "districts_best_crop_changes": 9,
+   "districts_switch_flag": 0,
+   "mean_warming_c": 1.0,
+   "mean_rain_change_pct": 10.2,
+   "mean_onset_shift_weeks": -0.6
+  },
+  "ssp585": {
+   "crops": {
+    "paddy": {
+     "districts_losing": 10,
+     "districts_gaining": 27,
+     "districts_unchanged": 94,
+     "suitable_now": 20,
+     "suitable_2050": 22,
+     "mean_baseline": 14.4,
+     "mean_2050": 16.8,
+     "biggest_drop": {
+      "id": "dakshina_kannada",
+      "name": "Dakshina Kannada",
+      "baseline": 87,
+      "y2050": 76,
+      "change": -11
+     },
+     "biggest_gain": {
+      "id": "thiruvananthapuram",
+      "name": "Thiruvananthapuram",
+      "baseline": 30,
+      "y2050": 68,
+      "change": 38
+     }
+    },
+    "ragi": {
+     "districts_losing": 65,
+     "districts_gaining": 5,
+     "districts_unchanged": 61,
+     "suitable_now": 131,
+     "suitable_2050": 131,
+     "mean_baseline": 95.3,
+     "mean_2050": 90.2,
+     "biggest_drop": {
+      "id": "sri_potti_sriramulu_nellore",
+      "name": "Sri Potti Sriramulu Nellore",
+      "baseline": 92,
+      "y2050": 64,
+      "change": -28
+     },
+     "biggest_gain": {
+      "id": "ballari",
+      "name": "Ballari",
+      "baseline": 72,
+      "y2050": 100,
+      "change": 28
+     }
+    },
+    "maize": {
+     "districts_losing": 13,
+     "districts_gaining": 24,
+     "districts_unchanged": 94,
+     "suitable_now": 110,
+     "suitable_2050": 114,
+     "mean_baseline": 82.8,
+     "mean_2050": 85.3,
+     "biggest_drop": {
+      "id": "kollam",
+      "name": "Kollam",
+      "baseline": 52,
+      "y2050": 15,
+      "change": -37
+     },
+     "biggest_gain": {
+      "id": "anantapur",
+      "name": "Anantapur",
+      "baseline": 36,
+      "y2050": 95,
+      "change": 59
+     }
+    }
+   },
+   "districts_best_crop_changes": 15,
+   "districts_switch_flag": 0,
+   "mean_warming_c": 1.4,
+   "mean_rain_change_pct": 14.8,
+   "mean_onset_shift_weeks": -0.6
+  }
+ }
+}

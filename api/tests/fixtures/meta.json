@@ -1,0 +1,16 @@
+{
+  "generated": "2026-11-15",
+  "models": ["ACCESS-CM2", "MIROC6", "MRI-ESM2-0"],
+  "datasets": [
+    {
+      "name": "NASA NEX-GDDP-CMIP6",
+      "ee_id": "NASA/GDDP-CMIP6",
+      "link": "https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6",
+      "period": "2001-2020, 2041-2060"
+    }
+  ],
+  "limitations": ["Rainfed only; irrigation is not modelled."],
+  "headline": { "crop": "paddy", "scenario": "ssp245", "districts_losing": 1, "total": 2 },
+  "validation": { "ndvi_correlation": 0.5 },
+  "fixture_only_extra": "kept"
+}
